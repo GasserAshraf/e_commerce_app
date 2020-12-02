@@ -3,6 +3,8 @@ import 'package:e_commerce_app/Widgets/CutomTextfield.dart';
 import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+
 
 class LoginScreen extends StatelessWidget {
   static String id = 'LoginScreen';
@@ -56,21 +58,27 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: height * 0.05),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 120),
-              child: FlatButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  onPressed: () async{
-                    if (_globalKey.currentState.validate()) {
-                      _globalKey.currentState.save();
-                     final result=await auth.signIn(_email, _password);
-                    print("String is === $result");
-                    }
-                  },
-                  color: Colors.black,
-                  child: Text(
-                    "Login",
-                    style: TextStyle(color: Colors.white),
-                  )),
+              child: Builder(
+                builder:(context)=> FlatButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    onPressed: () async {
+                      if (_globalKey.currentState.validate()) {
+                        _globalKey.currentState.save();
+                        try {
+                          final result = await auth.signIn(_email, _password);
+                        } catch (e) {
+                          Scaffold.of(context)
+                              .showSnackBar(SnackBar(content: e.message));
+                        }
+                      }
+                    },
+                    color: Colors.black,
+                    child: Text(
+                      "Login",
+                      style: TextStyle(color: Colors.white),
+                    )),
+              ),
             ),
             SizedBox(height: height * 0.05),
             Row(
