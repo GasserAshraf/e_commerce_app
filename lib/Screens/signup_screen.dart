@@ -1,14 +1,15 @@
-import 'package:e_commerce_app/Screens/signup_screen.dart';
+import 'package:e_commerce_app/Screens/login_screen.dart';
 import 'package:e_commerce_app/Widgets/CutomTextfield.dart';
 import 'package:e_commerce_app/constants.dart';
-import 'package:e_commerce_app/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:e_commerce_app/services/auth.dart';
 
-class LoginScreen extends StatelessWidget {
-  static String id = 'LoginScreen';
+
+class SignupScreen extends StatelessWidget {
+  static String id = "SignupScreen";
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
-  final auth = Auth();
   String _email, _password;
+  final _auth=Auth();
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +41,17 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: height * 0.1),
             CustomTextField(
-              hint: "Enter Your Email",
-              icon: Icons.email,
-              onClick: (value) {
-                _email = value;
-              },
+              hint: "Enter Your Name",
+              icon: Icons.person,
+              onClick: (value) {},
             ),
+            SizedBox(height: height * 0.02),
+            CustomTextField(
+                hint: "Enter Your Email",
+                icon: Icons.email,
+                onClick: (value) {
+                  _email = value;
+                }),
             SizedBox(height: height * 0.02),
             CustomTextField(
                 hint: "Enter Your Password",
@@ -59,16 +65,16 @@ class LoginScreen extends StatelessWidget {
               child: FlatButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
-                  onPressed: () async{
+                  onPressed: ()async {
                     if (_globalKey.currentState.validate()) {
                       _globalKey.currentState.save();
-                     final result=await auth.signIn(_email, _password);
-                    print("String is === $result");
+                    String uid=await _auth.signUp(_email, _password);
+                    print(uid);
                     }
                   },
                   color: Colors.black,
                   child: Text(
-                    "Login",
+                    "Sign up",
                     style: TextStyle(color: Colors.white),
                   )),
             ),
@@ -77,15 +83,15 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Don't have an acount ? ",
+                  "Do have an acount ? ",
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, SignupScreen.id);
+                    Navigator.pushNamed(context, LoginScreen.id);
                   },
                   child: Text(
-                    "Sign up",
+                    "Login",
                     style: TextStyle(fontSize: 16),
                   ),
                 )

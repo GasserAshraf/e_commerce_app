@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "623252244813",
+    "firebase_url": "https://just-buy-it-27caf.firebaseio.com",
+    "project_id": "just-buy-it-27caf",
+    "storage_bucket": "just-buy-it-27caf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623252244813:android:a24159b0697cfe7c0d0f04",
+        "android_client_info": {
+          "package_name": "com.example.e_commerce_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "623252244813-2go6gq82jt97kp417m7og654e3gqksib.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0Yrf2tzBxOQeoY9Qwoducuznwk2vbe2M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "623252244813-2go6gq82jt97kp417m7og654e3gqksib.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
