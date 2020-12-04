@@ -72,7 +72,8 @@ class SignupScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       onPressed: () async {
-                        final modalhud = Provider.of<ModalHud>(context,listen: false);
+                        final modalhud =
+                            Provider.of<ModalHud>(context, listen: false);
                         modalhud.changeboolvalue(true);
                         if (_globalKey.currentState.validate()) {
                           _globalKey.currentState.save();
