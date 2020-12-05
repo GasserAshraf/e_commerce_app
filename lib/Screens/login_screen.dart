@@ -1,8 +1,8 @@
-import 'package:e_commerce_app/Pages/admin_page.dart';
-import 'package:e_commerce_app/Pages/home_page.dart';
 import 'package:e_commerce_app/Provider/adminMode.dart';
 import 'package:e_commerce_app/Provider/modalhud.dart';
+import 'package:e_commerce_app/Screens/admin/admin_page.dart';
 import 'package:e_commerce_app/Screens/signup_screen.dart';
+import 'package:e_commerce_app/Screens/user/home_page.dart';
 import 'package:e_commerce_app/Widgets/CutomTextfield.dart';
 import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/services/auth.dart';
@@ -21,6 +21,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: maincolor,
@@ -73,20 +74,6 @@ class LoginScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       onPressed: () async {
-//                        final load =
-//                            Provider.of<ModalHud>(context, listen: false);
-//                        load.changeboolvalue(true);
-//                        if (_globalKey.currentState.validate()) {
-//                          _globalKey.currentState.save();
-//                          try {
-//                            final result = await auth.signIn(_email, _password);
-//                            load.changeboolvalue(false);
-//                          } catch (e) {
-//                            load.changeboolvalue(false);
-//                            Scaffold.of(context)
-//                                .showSnackBar(SnackBar(content: e.message));
-//                          }
-//                        }
                         _validate(context);
                       },
                       color: Colors.black,
@@ -115,42 +102,69 @@ class LoginScreen extends StatelessWidget {
                   )
                 ],
               ),
+              SizedBox(
+                height: height * 0.02,
+              ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          Provider.of<AdminMode>(context, listen: false)
-                              .changeIsAdmin(true);
-                        },
-                        child: Text(
-                          "i'm an admin",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color:
-                                  Provider.of<AdminMode>(context, listen: false)
-                                          .isAdmin
-                                      ? maincolor
-                                      : Colors.white),
+                    GestureDetector(
+                      onTap: () {
+                        Provider.of<AdminMode>(context, listen: false)
+                            .changeIsAdmin(true);
+                      },
+                      child: Container(
+                        width: width * 0.25,
+                        height: height * 0.03,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Provider.of<AdminMode>(context, listen: false)
+                                  .isAdmin
+                              ? maincolor
+                              : txtfldclr,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "i'm an admin",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Provider.of<AdminMode>(context,
+                                            listen: false)
+                                        .isAdmin
+                                    ? maincolor
+                                    : Colors.black),
+                          ),
                         ),
                       ),
                     ),
-                    Expanded(
-                        child: GestureDetector(
+                    //  SizedBox(width: width*0.3,),
+                    GestureDetector(
                       onTap: () {
                         Provider.of<AdminMode>(context, listen: false)
                             .changeIsAdmin(false);
                       },
-                      child: Text("i'm a user",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Provider.of<AdminMode>(context).isAdmin
-                                  ? Colors.white
-                                  : maincolor)),
-                    )),
+                      child: Container(
+                        width: width * 0.25,
+                        height: height * 0.03,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Provider.of<AdminMode>(context).isAdmin
+                              ? Colors.black
+                              : maincolor,
+                        ),
+                        child: Center(
+                          child: Text("i'm a user",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Provider.of<AdminMode>(context).isAdmin
+                                      ? Colors.white
+                                      : maincolor)),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               )

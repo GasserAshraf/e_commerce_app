@@ -1,8 +1,10 @@
-import 'package:e_commerce_app/Pages/admin_page.dart';
-import 'package:e_commerce_app/Pages/home_page.dart';
 import 'package:e_commerce_app/Provider/adminMode.dart';
 import 'package:e_commerce_app/Provider/modalhud.dart';
+import 'package:e_commerce_app/Screens/admin/addProduct.dart';
+import 'package:e_commerce_app/Screens/admin/admin_page.dart';
+import 'package:e_commerce_app/Screens/admin/editProduct.dart';
 import 'package:e_commerce_app/Screens/login_screen.dart';
+import 'package:e_commerce_app/Screens/user/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,8 +30,10 @@ class MyApp extends StatelessWidget {
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           SignupScreen.id: (context) => SignupScreen(),
-          HomePage.id:(context)=>HomePage(),
-          AdminPage.id:(context)=>AdminPage(),
+          HomePage.id: (context) => HomePage(),
+          AdminPage.id: (context) => AdminPage(),
+          AddProduct.id: (context) => AddProduct(),
+          EditProduct.id: (context) => EditProduct()
         },
       ),
     );
