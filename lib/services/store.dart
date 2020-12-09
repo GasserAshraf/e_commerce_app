@@ -15,18 +15,7 @@ class Store {
     });
   }
 
-  Future<List<Product>> loadProducts() async {
-    var snapshot = await _firestore.collection(kProductsCollection).get();
-    List<Product> products = [];
-    for (var doc in snapshot.documents) {
-      var data = doc.data();
-      products.add(Product(
-          pPrice: data[kProductPrice],
-          pLocation: data[kProductLocation],
-          pDescription: data[kProductDescription],
-          pCategory: data[kProductCategory],
-          pName: data[kProductName]));
-    }
-    return products;
+  Stream<QuerySnapshot> loadProducts() {
+    return _firestore.collection(kProductsCollection).snapshots();
   }
 }
