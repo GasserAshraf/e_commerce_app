@@ -20,13 +20,21 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    double width = MediaQuery
+        .of(context)
+        .size
+        .width;
 
     return Scaffold(
       backgroundColor: maincolor,
       body: ModalProgressHUD(
-        inAsyncCall: Provider.of<ModalHud>(context).isLoading,
+        inAsyncCall: Provider
+            .of<ModalHud>(context)
+            .isLoading,
         child: Form(
           key: _globalKey,
           child: ListView(
@@ -34,7 +42,10 @@ class LoginScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 80.0),
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.2,
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height * 0.2,
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -44,7 +55,7 @@ class LoginScreen extends StatelessWidget {
                         child: Text(
                           "Just Buy It",
                           style:
-                              TextStyle(fontFamily: 'Nerko One', fontSize: 25),
+                          TextStyle(fontFamily: 'Nerko One', fontSize: 25),
                         ),
                       ),
                     ],
@@ -70,17 +81,18 @@ class LoginScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 120),
                 child: Builder(
-                  builder: (context) => FlatButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      onPressed: () async {
-                        _validate(context);
-                      },
-                      color: Colors.black,
-                      child: Text(
-                        "Login",
-                        style: TextStyle(color: Colors.white),
-                      )),
+                  builder: (context) =>
+                      FlatButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          onPressed: () async {
+                            _validate(context);
+                          },
+                          color: Colors.black,
+                          child: Text(
+                            "Login",
+                            style: TextStyle(color: Colors.white),
+                          )),
                 ),
               ),
               SizedBox(height: height * 0.05),
@@ -107,7 +119,7 @@ class LoginScreen extends StatelessWidget {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -121,8 +133,9 @@ class LoginScreen extends StatelessWidget {
                         height: height * 0.03,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          color: Provider.of<AdminMode>(context, listen: false)
-                                  .isAdmin
+                          color: Provider
+                              .of<AdminMode>(context, listen: false)
+                              .isAdmin
                               ? maincolor
                               : txtfldclr,
                         ),
@@ -131,9 +144,10 @@ class LoginScreen extends StatelessWidget {
                             "i'm an admin",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Provider.of<AdminMode>(context,
-                                            listen: false)
-                                        .isAdmin
+                                color: Provider
+                                    .of<AdminMode>(context,
+                                    listen: false)
+                                    .isAdmin
                                     ? maincolor
                                     : Colors.black),
                           ),
@@ -151,7 +165,9 @@ class LoginScreen extends StatelessWidget {
                         height: height * 0.03,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          color: Provider.of<AdminMode>(context).isAdmin
+                          color: Provider
+                              .of<AdminMode>(context)
+                              .isAdmin
                               ? Colors.black
                               : maincolor,
                         ),
@@ -159,7 +175,9 @@ class LoginScreen extends StatelessWidget {
                           child: Text("i'm a user",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  color: Provider.of<AdminMode>(context).isAdmin
+                                  color: Provider
+                                      .of<AdminMode>(context)
+                                      .isAdmin
                                       ? Colors.white
                                       : maincolor)),
                         ),
@@ -180,8 +198,13 @@ class LoginScreen extends StatelessWidget {
     modalhud.changeboolvalue(true);
     if (_globalKey.currentState.validate()) {
       _globalKey.currentState.save();
-      print(Provider.of<AdminMode>(context, listen: false).isAdmin.toString());
-      if (Provider.of<AdminMode>(context, listen: false).isAdmin) {
+      print(Provider
+          .of<AdminMode>(context, listen: false)
+          .isAdmin
+          .toString());
+      if (Provider
+          .of<AdminMode>(context, listen: false)
+          .isAdmin) {
         if (_password == adminPassword) {
           try {
             print("1");
