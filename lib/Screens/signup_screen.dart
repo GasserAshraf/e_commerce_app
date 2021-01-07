@@ -78,7 +78,8 @@ class SignupScreen extends StatelessWidget {
                         if (_globalKey.currentState.validate()) {
                           _globalKey.currentState.save();
                           try {
-                            String uid = await _auth.signUp(_email, _password);
+                            String uid = await _auth.signUp(
+                                _email.trim(), _password.trim());
                             modalhud.changeboolvalue(false);
                           } catch (e) {
                             modalhud.changeboolvalue(false);

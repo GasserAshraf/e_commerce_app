@@ -35,13 +35,13 @@ class CustomTextField extends StatelessWidget {
           }
         },
         cursorColor: maincolor,
+
         decoration: InputDecoration(
           hintText: hint,
           prefixIcon: Icon(
             icon,
             color: maincolor,
           ),
-          filled: true,
           fillColor: txtfldclr,
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),

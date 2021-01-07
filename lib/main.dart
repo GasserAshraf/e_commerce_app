@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         initialRoute: LoginScreen.id,
         routes: {
+          // ProductInfo.id: (context) => ProductInfo(Product product),
           EditProduct.id: (context) => EditProduct(),
           LoginScreen.id: (context) => LoginScreen(),
           SignupScreen.id: (context) => SignupScreen(),

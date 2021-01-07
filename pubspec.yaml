@@ -53,6 +53,9 @@ flutter:
   assets:
     - images/icons/
     - images/jackets/
+    - images/trousers/
+    - images/shoes/
+    - images/t-shirts/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
