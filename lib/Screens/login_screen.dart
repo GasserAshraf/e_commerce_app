@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
         .width;
 
     return Scaffold(
-      backgroundColor: maincolor,
+      backgroundColor: mainColor,
       body: ModalProgressHUD(
         inAsyncCall: Provider
             .of<ModalHud>(context)
@@ -136,8 +136,8 @@ class LoginScreen extends StatelessWidget {
                           color: Provider
                               .of<AdminMode>(context, listen: false)
                               .isAdmin
-                              ? maincolor
-                              : txtfldclr,
+                              ? mainColor
+                              : textFieldColor,
                         ),
                         child: Center(
                           child: Text(
@@ -148,7 +148,7 @@ class LoginScreen extends StatelessWidget {
                                     .of<AdminMode>(context,
                                     listen: false)
                                     .isAdmin
-                                    ? maincolor
+                                    ? mainColor
                                     : Colors.black),
                           ),
                         ),
@@ -169,7 +169,7 @@ class LoginScreen extends StatelessWidget {
                               .of<AdminMode>(context)
                               .isAdmin
                               ? Colors.black
-                              : maincolor,
+                              : mainColor,
                         ),
                         child: Center(
                           child: Text("i'm a user",
@@ -179,7 +179,7 @@ class LoginScreen extends StatelessWidget {
                                       .of<AdminMode>(context)
                                       .isAdmin
                                       ? Colors.white
-                                      : maincolor)),
+                                      : mainColor)),
                         ),
                       ),
                     ),

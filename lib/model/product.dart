@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class Product {
   String pName;
   String pPrice;
@@ -5,12 +7,17 @@ class Product {
   String pDescription;
   String pCategory;
   String pId;
+  int pQuantity;
+  Color pColor;
 
   Product(
-      {this.pName,
+      {this.pQuantity,
+      this.pName,
       this.pPrice,
       this.pCategory,
       this.pDescription,
       this.pLocation,
-      this.pId});
+      this.pId,
+      this.pColor
+      });
 }

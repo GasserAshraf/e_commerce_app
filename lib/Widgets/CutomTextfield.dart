@@ -34,15 +34,15 @@ class CustomTextField extends StatelessWidget {
             return _errorMsg();
           }
         },
-        cursorColor: maincolor,
+        cursorColor: mainColor,
 
         decoration: InputDecoration(
           hintText: hint,
           prefixIcon: Icon(
             icon,
-            color: maincolor,
+            color: mainColor,
           ),
-          fillColor: txtfldclr,
+          fillColor: textFieldColor,
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide(color: Colors.white)),

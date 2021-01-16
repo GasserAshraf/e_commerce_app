@@ -1,6 +1,8 @@
+import 'package:e_commerce_app/Provider/cartItem.dart';
 import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/model/product.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductInfo extends StatefulWidget {
   static String id = "ProductInfo";
@@ -14,16 +16,18 @@ class ProductInfo extends StatefulWidget {
 
 class _ProductInfoState extends State<ProductInfo> {
   int _groupValue = 1;
+  int _quantity = 1;
 
   @override
   Widget build(BuildContext context) {
+    Product product = widget.product;
     return Scaffold(
       appBar: AppBar(
         title: Text(
           widget.product.pName,
-          style: TextStyle(color: maincolor),
+          style: TextStyle(color: mainColor),
         ),
-        iconTheme: IconThemeData(color: maincolor),
+        iconTheme: IconThemeData(color: mainColor),
         backgroundColor: Colors.white,
         actions: [
           Padding(
@@ -31,7 +35,7 @@ class _ProductInfoState extends State<ProductInfo> {
             child: GestureDetector(
               child: Icon(
                 Icons.shopping_cart,
-                color: maincolor,
+                color: mainColor,
               ),
             ),
           )
@@ -40,115 +44,191 @@ class _ProductInfoState extends State<ProductInfo> {
       body: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.6,
+            height: MediaQuery.of(context).size.height * 0.5,
             child: Image(
               image: AssetImage(widget.product.pLocation),
+              fit: BoxFit.fill,
             ),
           ),
-          ButtonBar(
-            alignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  _groupValue = 1;
-                },
-                child: Theme(
-                  data: Theme.of(context).copyWith(
-                      unselectedWidgetColor: Colors.white,
-                    //  disabledColor: Colors.blue
-                  ),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.016,
-                    width: MediaQuery.of(context).size.width * 0.035,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red),
-                    child: Transform.scale(
-                      scale: 1.5,
-                      child: Radio(
-                          activeColor: Colors.red,
-                          value: 0,
-                          groupValue: _groupValue,
-                          onChanged: (t) {
-                            setState(() {
-                              _groupValue = t;
-                            });
-                          }),
+          SizedBox(
+            height: 20,
+          ),
+          Opacity(
+            opacity: 0.5,
+            child: Container(
+              color: Colors.white,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.18,
+              child: Center(
+                  child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      widget.product.pDescription,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                      maxLines: 2,
                     ),
-                  ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("\$ ${widget.product.pPrice}",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ClipOval(
+                          child: Material(
+                            color: mainColor,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (_quantity > 1) {
+                                    _quantity--;
+                                  }
+                                });
+                              },
+                              child: SizedBox(
+                                child: Icon(Icons.remove),
+                                height: 28,
+                                width: 28,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Text(
+                          _quantity.toString(),
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        ClipOval(
+                          child: Material(
+                            color: mainColor,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _quantity++;
+                                });
+                              },
+                              child: SizedBox(
+                                child: Icon(Icons.add),
+                                height: 28,
+                                width: 28,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              )),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            child: Text(
+              "Choose Color",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ButtonBar(
+              alignment: MainAxisAlignment.center,
+              children: [
+                customRadioButton(Colors.red, 1),
+                SizedBox(
+                  width: 20,
+                ),
+                customRadioButton(Colors.green, 2),
+                SizedBox(
+                  width: 20,
+                ),
+                customRadioButton(Colors.yellow, 3),
+                SizedBox(
+                  width: 20,
+                ),
+                customRadioButton(Colors.blue, 4),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ButtonTheme(
+              minWidth: MediaQuery.of(context).size.width,
+              // height: MediaQuery.of(context).size.height*0.1,
+              child: Builder(
+                builder: (context) => RaisedButton(
+                  color: mainColor,
+                  child: Text("ADD TO CART",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  onPressed: () {
+                    product.pColor=chooseColor();
+                    addToCart(product);
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text("Added to Cart"),
+                    ));
+                  },
                 ),
               ),
-              SizedBox(
-                width: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  _groupValue = 2;
-                },
-                child: Theme(
-                  data: Theme.of(context).copyWith(
-                      unselectedWidgetColor: Colors.white,
-                  ),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.016,
-                    width: MediaQuery.of(context).size.width * 0.035,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.green),
-                    child: Transform.scale(
-                      scale: 1.5,
-                      child: Radio(
-                          activeColor: Colors.green,
-                          value: 1,
-                          groupValue: _groupValue,
-                          onChanged: (t) {
-                            setState(() {
-                              _groupValue = t;
-                            });
-                          }),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _groupValue = 3;
-                  });
-                },
-                child: Theme(
-                  data: Theme.of(context).copyWith(
-                      unselectedWidgetColor: Colors.white,
-                  ),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.016,
-                    width: MediaQuery.of(context).size.width * 0.035,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.yellow),
-                    child: Transform.scale(
-                      scale: 1.5,
-                      child: Radio(
-                          activeColor: Colors.yellow,
-                          hoverColor: Colors.green,
-                          value: 2,
-                          groupValue: _groupValue,
-                          onChanged: (t) {
-                            setState(() {
-                              _groupValue = t;
-                            });
-                          }),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          )
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  Widget customRadioButton(Color color, int value) {
+    return GestureDetector(
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          unselectedWidgetColor: Colors.white,
+          //  disabledColor: Colors.blue
+        ),
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.016,
+          width: MediaQuery.of(context).size.width * 0.035,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: color),
+          child: Transform.scale(
+            scale: 1.5,
+            child: Radio(
+                activeColor: color,
+                value: value,
+                groupValue: _groupValue,
+                onChanged: (t) {
+                  setState(() {
+                    _groupValue = t;
+                  });
+                }),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Color chooseColor(){
+    if (_groupValue == 1) {
+      return Colors.red;
+    } else if (_groupValue == 2) {
+      return Colors.green;
+    } else if (_groupValue == 3) {
+      return Colors.yellow;
+    } else {
+      return Colors.blue;
+    }
+
+  }
+  void addToCart(Product product) {
+    CartItem cartItem = Provider.of<CartItem>(context, listen: false);
+    product.pQuantity = _quantity;
+    cartItem.addProduct(product);
   }
 }

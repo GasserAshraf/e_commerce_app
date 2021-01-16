@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
           child: Scaffold(
             bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              fixedColor: maincolor,
+              fixedColor: mainColor,
               currentIndex: _bottomBarIndex,
               onTap: (value) {
                 setState(() {
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Colors.white,
               elevation: 0.0,
               bottom: TabBar(
-                indicatorColor: maincolor,
+                indicatorColor: mainColor,
                 onTap: (value) {
                   setState(() {
                     _tabBarIndex = value;

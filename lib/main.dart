@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/Provider/adminMode.dart';
+import 'package:e_commerce_app/Provider/cartItem.dart';
 import 'package:e_commerce_app/Provider/modalhud.dart';
 import 'package:e_commerce_app/Screens/admin/addProduct.dart';
 import 'package:e_commerce_app/Screens/admin/admin_page.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ModalHud>(create: (context) => ModalHud()),
-        ChangeNotifierProvider<AdminMode>(create: (context) => AdminMode())
+        ChangeNotifierProvider<AdminMode>(create: (context) => AdminMode()),
+        ChangeNotifierProvider<CartItem>(create: (context) => CartItem()),
       ],
       child: MaterialApp(
         initialRoute: LoginScreen.id,
