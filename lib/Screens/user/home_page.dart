@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_app/Screens/user/CartScreen.dart';
 import 'package:e_commerce_app/Screens/user/productInfo.dart';
 import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/model/product.dart';
@@ -115,7 +116,12 @@ class _HomePageState extends State<HomePage> {
                     "Discover".toUpperCase(),
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  Icon(Icons.shopping_cart)
+                  GestureDetector(
+                    child: Icon(Icons.shopping_cart),
+                    onTap: () {
+                      Navigator.pushNamed(context, CartScreen.id);
+                    },
+                  )
                 ],
               ),
             ),

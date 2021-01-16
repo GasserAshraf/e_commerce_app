@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/Provider/cartItem.dart';
+import 'package:e_commerce_app/Screens/user/CartScreen.dart';
 import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/model/product.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,9 @@ class _ProductInfoState extends State<ProductInfo> {
           Padding(
             padding: const EdgeInsets.only(right: 15),
             child: GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, CartScreen.id);
+              },
               child: Icon(
                 Icons.shopping_cart,
                 color: mainColor,
@@ -193,8 +197,8 @@ class _ProductInfoState extends State<ProductInfo> {
           //  disabledColor: Colors.blue
         ),
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.016,
-          width: MediaQuery.of(context).size.width * 0.035,
+          height: MediaQuery.of(context).size.height * 0.02,
+          width: MediaQuery.of(context).size.width * 0.04,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: color),
           child: Transform.scale(
@@ -226,6 +230,7 @@ class _ProductInfoState extends State<ProductInfo> {
     }
 
   }
+
   void addToCart(Product product) {
     CartItem cartItem = Provider.of<CartItem>(context, listen: false);
     product.pQuantity = _quantity;

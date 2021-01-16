@@ -6,6 +6,7 @@ import 'package:e_commerce_app/Screens/admin/admin_page.dart';
 import 'package:e_commerce_app/Screens/admin/editProduct.dart';
 import 'package:e_commerce_app/Screens/admin/manageProduct.dart';
 import 'package:e_commerce_app/Screens/login_screen.dart';
+import 'package:e_commerce_app/Screens/user/CartScreen.dart';
 import 'package:e_commerce_app/Screens/user/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         initialRoute: LoginScreen.id,
         routes: {
-          // ProductInfo.id: (context) => ProductInfo(Product product),
+          CartScreen.id: (context) => CartScreen(),
           EditProduct.id: (context) => EditProduct(),
           LoginScreen.id: (context) => LoginScreen(),
           SignupScreen.id: (context) => SignupScreen(),
