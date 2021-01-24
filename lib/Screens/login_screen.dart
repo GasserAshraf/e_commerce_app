@@ -29,166 +29,176 @@ class LoginScreen extends StatelessWidget {
         .size
         .width;
 
-    return Scaffold(
-      backgroundColor: mainColor,
-      body: ModalProgressHUD(
-        inAsyncCall: Provider
-            .of<ModalHud>(context)
-            .isLoading,
-        child: Form(
-          key: _globalKey,
-          child: ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 80.0),
-                child: Container(
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height * 0.2,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(image: AssetImage("images/icons/shopping.png")),
-                      Positioned(
-                        bottom: 0.0,
-                        child: Text(
-                          "Just Buy It",
-                          style:
-                          TextStyle(fontFamily: 'Nerko One', fontSize: 25),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: height * 0.1),
-              CustomTextField(
-                hint: "Enter Your Email",
-                icon: Icons.email,
-                onClick: (value) {
-                  _email = value;
-                },
-              ),
-              SizedBox(height: height * 0.02),
-              CustomTextField(
-                  hint: "Enter Your Password",
-                  icon: Icons.lock,
-                  onClick: (value) {
-                    _password = value;
-                  }),
-              SizedBox(height: height * 0.05),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 120),
-                child: Builder(
-                  builder: (context) =>
-                      FlatButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          onPressed: () async {
-                            _validate(context);
-                          },
-                          color: Colors.black,
-                          child: Text(
-                            "Login",
-                            style: TextStyle(color: Colors.white),
-                          )),
-                ),
-              ),
-              SizedBox(height: height * 0.05),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have an acount ? ",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, SignupScreen.id);
-                    },
-                    child: Text(
-                      "Sign up",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: height * 0.02,
-              ),
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+   return Scaffold(
+      body: OrientationBuilder(
+        builder: (context,orientation) {
+
+          return Scaffold(
+            backgroundColor: mainColor,
+            body: ModalProgressHUD(
+              inAsyncCall: Provider
+                  .of<ModalHud>(context)
+                  .isLoading,
+              child: Form(
+                key: _globalKey,
+                child: ListView(
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Provider.of<AdminMode>(context, listen: false)
-                            .changeIsAdmin(true);
-                      },
+                    Padding(
+                      padding: const EdgeInsets.only(top: 80.0),
                       child: Container(
-                        width: width * 0.25,
-                        height: height * 0.03,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Provider
-                              .of<AdminMode>(context, listen: false)
-                              .isAdmin
-                              ? mainColor
-                              : textFieldColor,
-                        ),
-                        child: Center(
-                          child: Text(
-                            "i'm an admin",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Provider
-                                    .of<AdminMode>(context,
-                                    listen: false)
-                                    .isAdmin
-                                    ? mainColor
-                                    : Colors.black),
-                          ),
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height * 0.2,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Image(image: AssetImage("images/icons/shopping.png")),
+                            Positioned(
+                              bottom: 0.0,
+                              child: Text(
+                                "Just Buy It",
+                                style:
+                                TextStyle(fontFamily: 'Nerko One', fontSize: 25),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    //  SizedBox(width: width*0.3,),
-                    GestureDetector(
-                      onTap: () {
-                        Provider.of<AdminMode>(context, listen: false)
-                            .changeIsAdmin(false);
+                    SizedBox(height: height * 0.1),
+                    CustomTextField(
+                      hint: "Enter Your Email",
+                      icon: Icons.email,
+                      onClick: (value) {
+                        _email = value;
                       },
-                      child: Container(
-                        width: width * 0.25,
-                        height: height * 0.03,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Provider
-                              .of<AdminMode>(context)
-                              .isAdmin
-                              ? Colors.black
-                              : mainColor,
+                    ),
+                    SizedBox(height: height * 0.02),
+                    CustomTextField(
+                        hint: "Enter Your Password",
+                        icon: Icons.lock,
+                        onClick: (value) {
+                          _password = value;
+                        }),
+                    SizedBox(height: height * 0.05),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 120),
+                      child: Builder(
+                        builder: (context) =>
+                            FlatButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                onPressed: () async {
+                                  _validate(context);
+                                },
+                                color: Colors.black,
+                                child: Text(
+                                  "Login",
+                                  style: TextStyle(color: Colors.white),
+                                )),
+                      ),
+                    ),
+                    SizedBox(height: height * 0.05),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an acount ? ",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
-                        child: Center(
-                          child: Text("i'm a user",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, SignupScreen.id);
+                          },
+                          child: Text(
+                            "Sign up",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    Container(
+                      height: height*0.2,
+                      child: Padding(
+                        padding:
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Provider.of<AdminMode>(context, listen: false)
+                                    .changeIsAdmin(true);
+                              },
+                              child: Container(
+                                width: width * 0.25,
+                                height: orientation==Orientation.portrait? height * 0.03:height * 0.06,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Provider
+                                      .of<AdminMode>(context, listen: false)
+                                      .isAdmin
+                                      ? mainColor
+                                      : textFieldColor,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "i'm an admin",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Provider
+                                            .of<AdminMode>(context,
+                                            listen: false)
+                                            .isAdmin
+                                            ? mainColor
+                                            : Colors.black),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            //  SizedBox(width: width*0.3,),
+                            GestureDetector(
+                              onTap: () {
+                                Provider.of<AdminMode>(context, listen: false)
+                                    .changeIsAdmin(false);
+                              },
+                              child: Container(
+                                width: width * 0.25,
+                                height: orientation==Orientation.portrait? height * 0.03:height * 0.06,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
                                   color: Provider
                                       .of<AdminMode>(context)
                                       .isAdmin
-                                      ? Colors.white
-                                      : mainColor)),
+                                      ? Colors.black
+                                      : mainColor,
+                                ),
+                                child: Center(
+                                  child: Text("i'm a user",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Provider
+                                              .of<AdminMode>(context)
+                                              .isAdmin
+                                              ? Colors.white
+                                              : mainColor)),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
+                    )
                   ],
                 ),
-              )
-            ],
-          ),
-        ),
+              ),
+            ),
+          );
+        }
       ),
     );
   }
